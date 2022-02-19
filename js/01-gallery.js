@@ -8,7 +8,7 @@ const galleryContainer = document.querySelector('.gallery');
 const galleryMarkup = createGalleryItems(galleryItems);
 
 galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup)
-galleryContainer.addEventListener('click', onGalleryContainerClick);
+galleryContainer.addEventListener('click', onGalleryClick);
 
 function createGalleryItems(galleryItems) {
     return galleryItems.map(({ preview, original, description }) => {
@@ -27,9 +27,10 @@ function createGalleryItems(galleryItems) {
     })
 .join('')
 }
-function onGalleryContainerClick(e) {
-    e.preventDefault();
-    
+
+function onGalleryClick(e) {
+        e.preventDefault();
+
     if (e.target.nodeName !== 'IMG') {
     return;
     }
@@ -37,7 +38,22 @@ function onGalleryContainerClick(e) {
 }
 
 function modalShow(src) {
-     const instance = basicLightbox.create(`<img src="${src}" width="800" height="600">`)
+        const instance = basicLightbox.create(
+            `<div class = "modal">
+                <img src="${src}" width="800" height="600">
+            </div>`,
+            {
+                onShow: () => {
+                window.addEventListener("keydown", onEscClick);
+              },
+              onClose: () => window.removeEventListener("keydown",  onEscClick),
+            }
 
-    instance.show()
+        );
+        function onEscClick(e) {
+  if (e.code === 'Escape') {
+    instance.close();
+    }  
 }
+instance.show()
+};
