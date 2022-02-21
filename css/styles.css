@@ -42,3 +42,36 @@
 .gallery__link:hover {
   cursor: zoom-in;
 }
+
+.js-palette {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.palette__item {
+  margin-right: 10px;
+}
+
+.palette__item:hover {
+  transition: transform var(--animation-duration) var(--timing-function);
+
+  transform: scale(1.05);
+}
+
+.palette__color {
+  width: 200px;
+  height: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.palette__meta {
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+}
+.palette__hex,
+.palette__rgb {
+  margin: 0;
+}
